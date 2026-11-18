@@ -1,0 +1,305 @@
+---
+title: "API Documentation"
+parent: "Application"
+summary: "Swagger UI exposes the Aurellis API OpenAPI document, showing its server URL and grouped endpoint summaries."
+tags: ["api", "documentation", "swagger"]
+related: []
+sources: ["exploration"]
+version: 99
+confidence: high
+has_open_conflicts: false
+updated_at: "2026-11-18T08:23:36.047Z"
+---
+
+## Sub-features
+- OpenAPI server selector
+- Endpoint summary cards
+
+## Business Rules
+- The API documentation page displays the server URL from the OpenAPI document and groups endpoint summaries into sections, including Cart and Addresses.
+- On `/api/docs`, clicking the “Authorize” button made no API calls after the click in the observed session.
+- In the “Available authorizations” dialog, cookieAuth (apiKey) has one textbox labelled “Value:” for the cookie value; the displayed cookie name is `authjs.session-token` and its location is `cookie`. No required marker, format, length, or pattern constraint is displayed for the textbox.
+- On `/api/docs`, clicking `GET /api/health Health check` changes the documentation URL to `#/Catalog/get_api_health` without making an API call; opening the documentation page makes `GET /api/openapi.json` and receives HTTP 200.
+- The API documentation page loads its OpenAPI specification from GET /api/openapi.json. Clicking the first "Collapse operation" button makes no additional API calls; the page remains under /api/docs#/.
+- The API documentation page uses the server URL dropdown and renders operation cards under the Cart and Addresses sections from the OpenAPI specification.
+- The API documentation screen groups `GET /api/health` with the summary `Health check` under `Catalog`.
+- On the API documentation screen, clicking the `get /api/health` button navigates the documentation URL to `#/Catalog/get_api_health`; the click makes no additional API calls.
+- Opening the API documentation loads the OpenAPI specification with GET /api/openapi.json; expanding the GET /api/products operation does not make an additional API call.
+- The GET /api/products operation's expanded Parameters section shows query parameters including minPrice, maxPrice, newIn, page, and pageSize; the UI renders these as integer, boolean, and string query parameter fields.
+- Within the expanded GET /api/products operation, the documentation UI includes dropdowns with the observed values true/false; featured, newest, price_asc, price_desc; and USD, EUR, GBP, AED.
+- The API documentation screen at `/api/docs` exposes the `GET /api/products/{slug}` operation titled “Get product detail by slug.”
+- On `/api/docs`, clicking the `get /api/products` button expands the GET `/api/products` operation documentation and changes the page hash to `#/Catalog/get_api_products`; the expanded documentation includes a Parameters table. The click makes no additional API calls.
+- On `/api/docs`, Swagger UI displays the button `GET /api/categories List categories with product counts`. Opening the page makes `GET /api/openapi.json` (200); clicking that button made no additional API calls.
+- On `/api/docs`, expanding `GET /api/collections List collections with product counts` shows its Parameters section, including a boolean query parameter; the interaction makes no additional API call after the documentation page loads.
+- The API Documentation page lists `GET /api/products/{slug}` with the summary “Get product detail by slug.”
+- The expanded `GET /api/products/{slug}` operation documents `slug` as a required string path parameter and `currency` as a string query parameter with the displayed options `--`, `USD`, `EUR`, `GBP`, and `AED`.
+- The expanded `GET /api/products/{slug}` operation documents a `200 OK` response with media type `application/json`; its example includes product identity (`id`, `slug`, `name`), category, primary image, starting price, new-in flag, rating and review count, description, story, images, variants, material metadata, and collections.
+- The expanded `GET /api/products/{slug}` operation documents a `404 Not found` response with media type `application/json` and an example error object containing `code`, `message`, and `details`.
+- Opening the `get /api/products/{slug}` operation control displays its parameter, server, Execute, and response documentation; opening it makes no API call after the page has loaded, while the page load calls `GET /api/openapi.json` and receives status `200`.
+- The API documentation lists `GET /api/categories` with the summary “List categories with product counts” under the Catalog section.
+- On opening the API documentation and clicking the `get /api/categories` button, the page makes `GET /api/openapi.json` while loading and makes no API calls after the click.
+- On `/api/docs`, selecting the `GET /api/cart` operation opens the documentation at the `#/Cart/get_api_cart` fragment; the selection itself makes no additional API call.
+- Loading `/api/docs` makes `GET /api/openapi.json`, which returned HTTP 200 and had 12 items at `$.tags` in the response; no API calls were made after selecting `GET /api/cart`.
+- The API documentation page lists `GET /api/collections` under Catalog with the summary “List collections with product counts.”
+- Selecting the `get /api/collections` documentation control opens the Catalog operation details at `#/Catalog/get_api_collections`; the details show a Parameters table with a boolean query parameter and a selector offering `--`, `true`, and `false`.
+- Opening the `get /api/collections` operation details makes no additional API call; the page load itself makes `GET /api/openapi.json` and receives status 200.
+- On /api/docs, clicking the button "put /api/cart/currency" changes the documentation URL fragment to #/Cart/put_api_cart_currency; the recorded post-click API calls are none.
+- On the Cart currency operation documentation, the displayed unnamed field contains the JSON example { "currency": "USD" }.
+- On `/api/docs`, opening the `GET /api/orders/{id}` operation titled “Get an order detail by id (authenticated)” makes no additional API calls; the page load itself calls `GET /api/openapi.json` once and receives HTTP 200.
+- On `/api/docs`, the Orders operations include `GET /api/orders` with the summary `List the authenticated user's orders`.
+- After clicking the `get /api/orders` button on `/api/docs`, the URL fragment changes to `#/Orders/get_api_orders`; no API calls occur after the click. The page-open request is `GET /api/openapi.json` (200).
+- On `/api/docs`, clicking the `GET /api/wishlist Get the authenticated user's wishlist` button made no additional API calls during the recorded interaction.
+- On `/api/docs`, clicking the `get /api/orders/{id}` endpoint control opens its operation-detail view and changes the URL fragment to `#/Orders/get_api_orders__id_`; the click makes no additional API calls after the page's initial OpenAPI document request.
+- On `/api/docs`, the `GET /api/products/{slug}/reviews List approved reviews for a product` operation can be selected in the API documentation; opening the documentation page fetched `GET /api/openapi.json` (200), and selecting this operation made no further API calls.
+- On `/api/docs`, clicking the `get /api/orders/lookup` button navigates the docs URL to `#/Orders/get_api_orders_lookup`; the click makes no API request after the page's initial OpenAPI document load.
+- On `/api/docs`, clicking the button labeled `get /api/wishlist` changes the documentation URL hash to `#/Wishlist/get_api_wishlist`; opening the page requests `GET /api/openapi.json`, and the click makes no additional API request.
+- On `/api/docs`, the Addresses section includes the endpoint summary “Create a new saved address” and two address-detail endpoint summaries under `/api/addresses/{id}`.
+- Opening `/api/docs` makes a `GET /api/openapi.json` request; clicking the “GET /api/addresses List saved addresses” button made no additional API call during this observation.
+- On `/api/docs`, clicking `get /api/products/{slug}/reviews` opens the Reviews operation details and displays a Parameters table with `slug` as a required string path parameter.
+- Opening `/api/docs` makes `GET /api/openapi.json` (200); clicking `get /api/products/{slug}/reviews` made no additional API call.
+- On `/api/docs`, selecting the button `GET /api/chat/topics List browsable help topics, grouped by category` opens the Swagger UI operation view at `#/Chat/get_api_chat_topics`; the page load makes `GET /api/openapi.json` and selecting this button makes no additional API calls.
+- On `/api/docs`, clicking the `get /api/addresses` operation button navigates to `#/Addresses/get_api_addresses` and shows the Addresses operation details from the already-loaded OpenAPI document; this click makes no additional API request.
+- Opening `/api/docs` loads `GET /api/openapi.json`, which returns 200 and supplies 12 tags to the documentation page.
+- Clicking the button `get /api/chat/topics` changes the documentation URL to `#/Chat/get_api_chat_topics`; the click makes no API calls.
+- On /api/docs, clicking the “Schemas” button triggers no additional API calls; the page documentation content is based on GET /api/openapi.json, which runs when the page opens.
+- On `/api/docs`, the page requests `GET /api/openapi.json` and renders the response's server URL in a dropdown; the captured response supplied 12 API tags.
+- The API Documentation page shows address operation summaries from `$.paths./api/addresses[*].summary` in the Addresses card; the inspected slot showed 2 of 4 summaries, including “Update a saved address” and “Delete a saved address.”
+- On `/api/docs`, clicking the "Money" button makes no additional API calls; the only call recorded while the page opens is `GET /api/openapi.json` (200).
+- Opening `/api/docs` makes a GET request to `/api/openapi.json`; the Swagger UI shows the server dropdown value `https://aurellis.fashion`, along with documentation cards for Cart and Addresses operations.
+- Clicking the first `Expand all` button on `/api/docs` makes no additional API calls.
+- On `/api/docs`, the Swagger UI loads the API definition with `GET /api/openapi.json`; clicking the `get /api/chat/topics/{id}` button navigates to the Chat operation detail without making an additional API call.
+- Opening `/api/docs` requests `GET /api/openapi.json`; the server dropdown displays the value from `servers[*].url` (observed value: `https://aurellis.fashion`). Clicking the `Currency` button produced no additional API calls during the observation.
+- The API documentation page showed cards in the `Cart` section whose summaries included “Get the current cart (guest or authenticated)”, “Add an item to the cart”, “Apply a promo code to the cart”, “Clear the cart's promo code”, and “Set the active currency on the cart”; the matched summaries from the OpenAPI response were in the same order as sent.
+- The API documentation page showed cards in the `Addresses` section whose summaries included “Update a saved address” and “Delete a saved address”; the matched summaries from the OpenAPI response were in the same order as sent.
+- Clicking the "Error" button on /api/docs made no API calls after the click.
+- The API documentation page is rendered from GET /api/openapi.json; its server selector displays the server URL value from `servers[*].url`.
+- On the API documentation page, the Cart section shows operation cards, including summaries for the operations under `/api/cart/items/{id}`; the observed comparison found 2 of 7 API summaries displayed, in the same order, alongside five UI-only descriptions: "Get the current cart (guest or authenticated)", "Add an item to the cart", "Apply a promo code to the cart", "Clear the cart's promo code", and "Set the active currency on the cart".
+- On the API documentation page, the Addresses section shows operation cards, including summaries for `/api/addresses`; the observed comparison found 2 of 4 API summaries displayed, in the same order, alongside the UI-only descriptions "Update a saved address" and "Delete a saved address".
+- On `/api/docs`, the page loads `GET /api/openapi.json` and the server dropdown shows the value from `servers[*].url` (observed value: `https://aurellis.fashion`).
+- On `/api/docs`, the Cart section's operation-summary cards show two of the seven summaries sent by `GET /api/openapi.json` for `/api/cart/items/{id}`; the page also displays the summaries “Get the current cart (guest or authenticated)”, “Add an item to the cart”, “Apply a promo code to the cart”, “Clear the cart's promo code”, and “Set the active currency on the cart”, which were not present in that response field.
+- On `/api/docs`, the Addresses section's operation-summary cards show two of the four summaries sent by `GET /api/openapi.json` for `/api/addresses`; the page also displays “Update a saved address” and “Delete a saved address”, which were not present in that response field.
+- Clicking the `HelpTopicSummary` button on `/api/docs` resulted in no API calls after the click.
+- On `/api/docs`, clicking the "Pagination" button shows its documentation section and makes no additional API calls.
+- On `/api/docs`, clicking the `ProductImage` button made no API calls.
+- On `/api/docs`, the server dropdown displays `https://aurellis.fashion`, matching the server URL returned by `GET /api/openapi.json`.
+- On `/api/docs`, the Cart section shows 2 of the 7 operation summaries returned by `GET /api/openapi.json` in the same order; the page also displays the summaries “Get the current cart (guest or authenticated)”, “Add an item to the cart”, “Apply a promo code to the cart”, “Clear the cart's promo code”, and “Set the active currency on the cart”.
+- On `/api/docs`, the Addresses section shows 2 of the 4 operation summaries returned by `GET /api/openapi.json` in the same order; the page also displays “Update a saved address” and “Delete a saved address”.
+- Opening `/api/docs` requests `GET /api/openapi.json`; the response supplies the server URL shown by the page's server dropdown.
+- Clicking the `ProductSummary` button on `/api/docs` made no additional API calls.
+- On `/api/docs`, clicking the operation button `patch /api/addresses/{id}` opens the Swagger documentation view at `#/Addresses/patch_api_addresses__id_` and shows a `Parameters` section; the interaction makes no API request. Opening the documentation page makes `GET /api/openapi.json` and receives 200.
+- The API Documentation page at `/api/docs` presents an API server dropdown and endpoint-summary cards grouped into sections including Cart and Addresses, populated from `/api/openapi.json`.
+- The API Documentation screen at /api/docs renders endpoint cards using API specification summaries; the initial inspection showed Cart and Addresses section cards, with visible card content beyond the summary values returned by the OpenAPI response mapping.
+- On `/api/docs`, clicking the button "Category" makes no API calls.
+- When `/api/docs` loads, it requests `GET /api/openapi.json`; the dropdown showing `https://aurellis.fashion` reflects `servers[*].url` from that response.
+- The API documentation page shows two of the seven summaries from `/api/cart/items/{id}` in the Cart section, and two of the four summaries from `/api/addresses` in the Addresses section; the shown summaries match the sent summaries in the same order.
+- On `/api/docs`, clicking the "Collection" button makes no API calls; the page shows endpoint cards under the "Cart" and "Addresses" sections, including the displayed summaries "Get the current cart (guest or authenticated)", "Add an item to the cart", "Apply a promo code to the cart", "Clear the cart's promo code", "Set the active currency on the cart", "Update a saved address", and "Delete a saved address".
+- Opening `/api/docs` makes a GET request to `/api/openapi.json`; the documentation page shows a server dropdown populated from `servers[*].url` in that response, with `https://aurellis.fashion` shown.
+- The API documentation includes a `Cart` section whose endpoint summaries are sourced from `paths./api/cart/items/{id}[*].summary`; the inspected response-to-page comparison found 2 of 7 displayed summaries matching 2 sent, in the same order.
+- The API documentation includes an `Addresses` section whose endpoint summaries are sourced from `paths./api/addresses[*].summary`; the inspected response-to-page comparison found 2 of 4 displayed summaries matching 2 sent, in the same order.
+- The API Documentation page displays API operation cards grouped by tags. Clicking the "Cart" button shows Cart operations, including the summaries "Get the current cart (guest or authenticated)", "Add an item to the cart", "Apply a promo code to the cart", "Clear the cart's promo code", and "Set the active currency on the cart"; the API specification provided two of seven Cart summary cards, in the same order.
+- On /api/docs, opening the documentation page makes GET /api/openapi.json (200); the server dropdown displays the value from $.servers[*].url.
+- On /api/docs, the Cart section shows the summaries "Get the current cart (guest or authenticated)", "Add an item to the cart", "Apply a promo code to the cart", "Clear the cart's promo code", and "Set the active currency on the cart" as page-only text alongside two summaries matched to the OpenAPI response; the click on button "CartTotals" made no additional API calls.
+- On /api/docs, the Addresses section shows "Update a saved address" and "Delete a saved address" as page-only text alongside two summaries matched to the OpenAPI response; the click on button "CartTotals" made no additional API calls.
+- On `/api/docs`, clicking the "Address" button shows an "Addresses" section with endpoint cards including "Update a saved address" and "Delete a saved address"; the two shown summaries match the corresponding entries in `GET /api/openapi.json` at `$.paths./api/addresses[*].summary` and appear in the same order.
+- Opening `/api/docs` makes `GET /api/openapi.json`; clicking the "Address" button makes no additional API calls.
+- On `/api/docs`, the server dropdown displays `https://aurellis.fashion`, sourced from `servers[*].url` in `GET /api/openapi.json`.
+- Opening `/api/docs` requests `GET /api/openapi.json`; clicking the `WishlistItem` button produced no additional API calls in this observation.
+- The API documentation page is served from `/api/docs` and loads the OpenAPI specification from `GET /api/openapi.json`; the Cancel button click makes no additional API calls.
+- On `/api/docs#/Catalog/get_api_health`, clicking the `Execute` button makes a `GET /api/health` request; the request returned HTTP 200 in this observation.
+- In the API Documentation "Available authorizations" dialog, clicking "Apply credentials" with the "Value:" field empty leaves the dialog open and displays no validation message.
+- In the API Documentation authorization dialog, selecting "Apply credentials" with the "Value:" field empty leaves the dialog open and displays no validation message.
+- On the API Documentation page's `GET /api/products` operation, executing with the `newIn` parameter set to `true` sends `GET /api/products?newIn=true` and returns 6 products; set to `false` sends `GET /api/products?newIn=false` and returns 20 products; leaving it at `--` omits the query parameter, sends `GET /api/products`, and returns 20 products.
+- On the expanded GET /api/products operation in /api/docs, the Media Type selector offers only application/json and has it selected. Selecting application/json leaves the documentation page unchanged and makes no API call; the selector is described as controlling the Accept header, not filtering product results.
+- On the `GET /api/products` operation, selecting sort option `--` and clicking `Execute` sends `GET /api/products` without a `sort` query parameter; selecting `featured`, `newest`, `price_asc`, or `price_desc` and clicking `Execute` sends `GET /api/products?sort=<selected option>`. Each of these five requests returned 20 products.
+- On /api/docs, selecting the "Schema" tab makes no additional API call; the page load retrieves GET /api/openapi.json (200), which supplies the documentation data.
+- On `/api/docs#/Catalog/get_api_products`, the Currency select offers `--`, `USD`, `EUR`, `GBP`, and `AED`. After selecting an option and clicking `Execute`, `--` calls `GET /api/products` without a currency query parameter; each currency option calls `GET /api/products?currency=<option>`. Each of the five requests returned HTTP 200 with 20 products at `$.products`.
+- When `/api/docs` loads, the page requests `GET /api/openapi.json`; the Servers dropdown shows the value from `servers[*].url`.
+- On `/api/docs`, loading the documentation page makes a `GET /api/openapi.json` request; expanding the `Cart` schema's `totals*` property makes no additional API calls.
+- On /api/docs, after opening the Cart schema, the required `items` field is shown as `array<object>`; clicking its button expands an inline nested `Items` object. The page loads `GET /api/openapi.json` when opened, and this click makes no additional API call.
+- On `/api/docs`, after expanding `ProductDetail` in the Schemas section, clicking the `primaryImage` button expands its schema details, showing `(object | null)` and a `One of` button.
+- Opening `/api/docs` makes `GET /api/openapi.json` and receives HTTP 200; clicking `ProductDetail` and `primaryImage` makes no additional API calls.
+- On /api/docs, clicking the ProductVariant price property makes no additional API call; opening the documentation page makes GET /api/openapi.json.
+- In the API Documentation page's Schemas section, the ProductDetail schema marks materialMeta as required and displays it as an object with “Additional properties allowed.”
+- On `/api/docs`, the `Schemas` section shows the `ProductListResponse` object. Expanding `ProductListResponse` shows required properties `products*`, `meta*`, and `facets*`; expanding `meta*` shows required integer properties `page*`, `pageSize*`, `total*`, and `totalPages*`. Loading the documentation makes `GET /api/openapi.json`; expanding `ProductListResponse` and `meta*` made no additional API calls.
+- Expanding the `unitPrice` field in the `CartLineItem` schema is a local documentation interaction; it makes no additional API calls after the page loads.
+- The `amountCents` property in the `CartTotals.subtotal` schema is an integer with a minimum of 0; `currency` and `formatted` are required string properties.
+- On /api/docs, the Schemas section initially lists CartTotals collapsed; after clicking the CartTotals button, its properties include total as an object. Clicking the total button expands it to show amountCents* as an integer with ≥ 0, currency* as a string, and formatted* as a string. The page load makes GET /api/openapi.json; clicking CartTotals and total makes no further API calls.
+- On `/api/docs`, expanding the `Cart` schema, then `totals*`, then `tax` shows `tax` as an object with required fields `amountCents*` (integer, ≥ 0), `currency*` (string), and `formatted*` (string).
+- Opening the API documentation loads `GET /api/openapi.json` (200); clicking `Cart`, `totals*`, and `tax` makes no further API calls.
+- On `/api/docs`, expanding the `CartTotals` schema reveals the `freeShippingThreshold` button; expanding that property displays `One of` with the type `(object | null)`. These schema expansions make no additional API calls; loading the page makes `GET /api/openapi.json`.
+- On `/api/docs`, the Schemas section must be expanded before the `Address` schema's fields are visible; the required string field is rendered as the button `country*`, and expanding it reveals `ISO 3166-1 alpha-2`. Expanding the field makes no additional API call.
+- In the OrderSummary schema, the `status` field is a string enum with the values PENDING, PAID, FULFILLED, CANCELLED, and REFUNDED; expanding OrderSummary and selecting "status" displays this field's schema details.
+- On `/api/docs#/Catalog/get_api_health`, selecting Execute on the expanded `GET /api/health` Health check operation sends `GET /api/health` (200); after that response is produced, the `Clear` button can be clicked.
+- On `/api/docs`, expanding the `ProductSummary` schema and its `primaryImage` property exposes a `One of` button. Clicking `One of` expands the alternatives `#0` (object) and `#1` (null); the click makes no additional API call. Opening the documentation page makes `GET /api/openapi.json` (200).
+- On /api/docs, clicking “Authorize” opens “Available authorizations” with “cookieAuth (apiKey)”; it shows Name “authjs.session-token”, In “cookie”, a “Value:” textbox, and “Apply credentials” and “Close” buttons.
+
+## Entities
+- The API Documentation page displays a Swagger operation card for `PUT /api/cart/currency`, titled “Set the active currency on the cart.”
+- The API documentation lists GET /api/cart in the Cart section with the summary “Get the current cart (guest or authenticated).”
+- The API documentation lists `GET /api/orders` with the summary “List the authenticated user's orders.”
+- The API documentation lists GET /api/orders/lookup as “Guest order lookup by order number + email.”
+- The API documentation lists `GET /api/wishlist` with the description “Get the authenticated user's wishlist.”
+- The API documentation lists `GET /api/chat/topics` with the summary `List browsable help topics, grouped by category`.
+- The API documentation lists `GET /api/chat/topics/{id}` as “Get a single help topic's question and answer.”
+- The page displays operation cards in the `Cart` and `Addresses` sections, including endpoint summaries sourced from `/api/openapi.json`; the inspection matched 2 of 7 summaries in `Cart` and 2 of 4 in `Addresses` in the same order.
+- The API documentation page displays `WishlistItem` as a button/control; the observed OpenAPI response included 12 items at `$.tags`.
+- The "Schema" tab displays a server selector showing https://aurellis.fashion and an unnamed Currency selector with options --, USD, EUR, GBP, and AED; the page additionally shows unnamed selectors with options --, true, false and --, featured, newest, price_asc, price_desc.
+- The Schema view's Parameters table for GET /api/products shows seven of twelve parameter rows: the shown rows include five integer/boolean typed query parameters (minPrice, maxPrice, newIn, page, pageSize) and seven rows match the OpenAPI parameter list in order; five sent parameter entries are not shown because the API documentation contains duplicate string-typed entries for those same parameter names.
+- The API documentation page includes operation cards under the Cart and Addresses sections. The probe identified Cart summaries including "Get the current cart (guest or authenticated)", "Add an item to the cart", "Apply a promo code to the cart", "Clear the cart's promo code", and "Set the active currency on the cart"; it identified Addresses summaries including "Update a saved address" and "Delete a saved address".
+- The API Documentation page is titled “Aurellis API — Swagger UI” and describes the API as “REST API for the Aurellis demo storefront. Used by the storefront UI and surfaced for API testing demos via LuciusAI.”
+- The Cart section displays operation cards whose visible summaries include “Get the current cart (guest or authenticated)”, “Add an item to the cart”, “Apply a promo code to the cart”, “Clear the cart's promo code”, and “Set the active currency on the cart”; the inspected match at section slot 3 had 2 of 7 summaries matching the API response, in the same order.
+- The Addresses section displays operation cards whose visible summaries include “Update a saved address” and “Delete a saved address”; the inspected match at section slot 3 had 2 of 4 summaries matching the API response, in the same order.
+- On `/api/docs`, the expanded `Cart` schema shows `totals*` as an object with `subtotal`, `discount`, `shipping`, `tax`, `total`, and `freeShippingThreshold` properties; `freeShippingThreshold` is nullable.
+- On /api/docs, the ProductVariant schema includes a required price object with required amountCents (integer, ≥ 0), currency (string), and formatted (string) fields; clicking the price property expands these fields.
+- The `CartLineItem` schema defines `unitPrice` as an object with required `amountCents` (integer, minimum 0), required `currency` (string), and required `formatted` (string) fields.
+- In the expanded `CartTotals` schema, `subtotal` is an object with required properties `amountCents` (integer, ≥ 0), `currency` (string), and `formatted` (string).
+- In the API Documentation Schemas section, expanding CartTotals and then discount shows a Money-shaped object with required amountCents (integer, ≥ 0), currency (string), and formatted (string) fields.
+- In the `OrderSummary` schema on `/api/docs`, the `paidIn` field is shown as `string | null` and described as the currency the shopper paid in when not USD; the description states that order amounts are always in USD.
+
+## Terminology
+- Swagger UI
+- OpenAPI
+
+## Unexplored / Unknown
+- select "https://aurellis.fashion" on /api/docs - no evidence of options-tried, result-counts, network after 2 attempts - last error: The page could not be inspected: UI select dropdown "Servers" option "https://aurellis.fashion": its target matched nothing on the page (waited 15 s)
+- button "POST /api/cart/items Add an item to the cart" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/cart​/items" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "PATCH /api/cart/items/{id} Update the quantity of a cart item" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "DELETE /api/cart/items/{id} Remove a cart item" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "delete ​/api​/cart​/items​/{id}" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "POST /api/cart/promo Apply a promo code to the cart" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/cart​/promo" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "DELETE /api/cart/promo Clear the cart's promo code" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "delete ​/api​/cart​/promo" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "POST /api/checkout Create a checkout (PaymentIntent) for the active cart" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/checkout" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/stripe/webhook Stripe webhook receiver" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/stripe​/webhook" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/wishlist/items Add a product to the wishlist" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/wishlist​/items" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "DELETE /api/wishlist/items/{productId} Remove a product from the wishlist" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "delete ​/api​/wishlist​/items​/{productId}" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "POST /api/reviews Submit a product review (awaits moderation)" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/reviews" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/auth/sign-up Register a new customer account" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/auth​/sign-up" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/auth/forgot-password Request a password reset email" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/auth​/forgot-password" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/auth/reset-password Reset password using a token" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/auth​/reset-password" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/addresses Create a new saved address" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/addresses" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "PATCH /api/addresses/{id} Update a saved address" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "DELETE /api/addresses/{id} Delete a saved address" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "delete ​/api​/addresses​/{id}" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "POST /api/promo-codes/validate Validate a promo code against a subtotal" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/promo-codes​/validate" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/admin/orders/{id}/refund Refund an order (admin only)" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "post ​/api​/admin​/orders​/{id}​/refund" on /api/docs - needs a sandbox or a person: it would make a change that cannot be undone in a protected environment
+- button "POST /api/newsletter Subscribe an email to the newsletter" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/newsletter" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/chat Ask the Aurellis Concierge a question" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "post ​/api​/chat" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- button "POST /api/chat/feedback Rate a single Concierge reply (thumbs up/down)" on /api/docs - needs a sandbox or a person: it would change data in a protected environment
+- ...and 23 more not explored or unknown - all of them are in .explore/coverage.json.
+
+## Changelog
+- v99 (2026-11-18): Regenerated from typed knowledge items (138 observed, 8 unknown). [sources: exploration]
+- v98 (2026-11-18): Regenerated from typed knowledge items (138 observed, 8 unknown). [sources: exploration]
+- v97 (2026-11-18): Regenerated from typed knowledge items (137 observed, 8 unknown). [sources: exploration]
+- v96 (2026-11-18): Regenerated from typed knowledge items (137 observed, 8 unknown). [sources: exploration]
+- v95 (2026-11-18): Regenerated from typed knowledge items (136 observed, 8 unknown). [sources: exploration]
+- v94 (2026-11-18): Regenerated from typed knowledge items (135 observed, 8 unknown). [sources: exploration]
+- v93 (2026-11-18): Regenerated from typed knowledge items (135 observed, 7 unknown). [sources: exploration]
+- v92 (2026-11-18): Regenerated from typed knowledge items (134 observed, 7 unknown). [sources: exploration]
+- v91 (2026-11-18): Regenerated from typed knowledge items (133 observed, 7 unknown). [sources: exploration]
+- v90 (2026-11-18): Regenerated from typed knowledge items (132 observed, 7 unknown). [sources: exploration]
+- v89 (2026-11-18): Regenerated from typed knowledge items (131 observed, 7 unknown). [sources: exploration]
+- v88 (2026-11-18): Regenerated from typed knowledge items (129 observed, 7 unknown). [sources: exploration]
+- v87 (2026-11-18): Regenerated from typed knowledge items (128 observed, 7 unknown). [sources: exploration]
+- v86 (2026-11-18): Regenerated from typed knowledge items (127 observed, 7 unknown). [sources: exploration]
+- v85 (2026-11-18): Regenerated from typed knowledge items (125 observed, 7 unknown). [sources: exploration]
+- v84 (2026-11-18): Regenerated from typed knowledge items (123 observed, 7 unknown). [sources: exploration]
+- v83 (2026-11-18): Regenerated from typed knowledge items (122 observed, 7 unknown). [sources: exploration]
+- v82 (2026-11-18): Regenerated from typed knowledge items (121 observed, 7 unknown). [sources: exploration]
+- v81 (2026-11-18): Regenerated from typed knowledge items (119 observed, 7 unknown). [sources: exploration]
+- v80 (2026-11-18): Regenerated from typed knowledge items (117 observed, 7 unknown). [sources: exploration]
+- v79 (2026-11-18): Regenerated from typed knowledge items (116 observed, 7 unknown). [sources: exploration]
+- v78 (2026-11-18): Regenerated from typed knowledge items (114 observed, 7 unknown). [sources: exploration]
+- v77 (2026-11-18): Regenerated from typed knowledge items (110 observed, 7 unknown). [sources: exploration]
+- v76 (2026-11-18): Regenerated from typed knowledge items (109 observed, 7 unknown). [sources: exploration]
+- v75 (2026-11-18): Regenerated from typed knowledge items (105 observed, 7 unknown). [sources: exploration]
+- v74 (2026-11-18): Regenerated from typed knowledge items (105 observed, 7 unknown). [sources: exploration]
+- v73 (2026-11-18): Regenerated from typed knowledge items (104 observed, 7 unknown). [sources: exploration]
+- v72 (2026-11-18): Regenerated from typed knowledge items (103 observed, 7 unknown). [sources: exploration]
+- v71 (2026-11-18): Regenerated from typed knowledge items (102 observed, 7 unknown). [sources: exploration]
+- v70 (2026-11-18): Regenerated from typed knowledge items (101 observed, 7 unknown). [sources: exploration]
+- v69 (2026-11-18): Regenerated from typed knowledge items (100 observed, 7 unknown). [sources: exploration]
+- v68 (2026-11-18): Regenerated from typed knowledge items (100 observed, 7 unknown). [sources: exploration]
+- v67 (2026-11-18): Regenerated from typed knowledge items (99 observed, 7 unknown). [sources: exploration]
+- v66 (2026-11-18): Regenerated from typed knowledge items (98 observed, 7 unknown). [sources: exploration]
+- v65 (2026-11-18): Regenerated from typed knowledge items (98 observed, 7 unknown). [sources: exploration]
+- v64 (2026-11-18): Regenerated from typed knowledge items (96 observed, 7 unknown). [sources: exploration]
+- v63 (2026-11-18): Regenerated from typed knowledge items (96 observed, 6 unknown). [sources: exploration]
+- v62 (2026-11-18): Regenerated from typed knowledge items (93 observed, 6 unknown). [sources: exploration]
+- v61 (2026-11-18): Regenerated from typed knowledge items (90 observed, 6 unknown). [sources: exploration]
+- v60 (2026-11-18): Regenerated from typed knowledge items (89 observed, 6 unknown). [sources: exploration]
+- v59 (2026-11-18): Regenerated from typed knowledge items (86 observed, 6 unknown). [sources: exploration]
+- v58 (2026-11-18): Regenerated from typed knowledge items (85 observed, 6 unknown). [sources: exploration]
+- v57 (2026-11-18): Regenerated from typed knowledge items (82 observed, 6 unknown). [sources: exploration]
+- v56 (2026-11-18): Regenerated from typed knowledge items (81 observed, 6 unknown). [sources: exploration]
+- v55 (2026-11-18): Regenerated from typed knowledge items (80 observed, 6 unknown). [sources: exploration]
+- v54 (2026-11-18): Regenerated from typed knowledge items (80 observed, 5 unknown). [sources: exploration]
+- v53 (2026-11-18): Regenerated from typed knowledge items (79 observed, 5 unknown). [sources: exploration]
+- v52 (2026-11-18): Regenerated from typed knowledge items (79 observed, 4 unknown). [sources: exploration]
+- v51 (2026-11-18): Regenerated from typed knowledge items (76 observed, 4 unknown). [sources: exploration]
+- v50 (2026-11-18): Regenerated from typed knowledge items (72 observed, 3 unknown). [sources: exploration]
+- v49 (2026-11-18): Regenerated from typed knowledge items (71 observed, 3 unknown). [sources: exploration]
+- v48 (2026-11-18): Regenerated from typed knowledge items (67 observed, 3 unknown). [sources: exploration]
+- v47 (2026-11-18): Regenerated from typed knowledge items (64 observed, 3 unknown). [sources: exploration]
+- v46 (2026-11-18): Regenerated from typed knowledge items (63 observed, 3 unknown). [sources: exploration]
+- v45 (2026-11-18): Regenerated from typed knowledge items (60 observed, 3 unknown). [sources: exploration]
+- v44 (2026-11-18): Regenerated from typed knowledge items (59 observed, 3 unknown). [sources: exploration]
+- v43 (2026-11-18): Regenerated from typed knowledge items (57 observed, 3 unknown). [sources: exploration]
+- v42 (2026-11-18): Regenerated from typed knowledge items (57 observed, 3 unknown). [sources: exploration]
+- v41 (2026-11-18): Regenerated from typed knowledge items (56 observed, 3 unknown). [sources: exploration]
+- v40 (2026-11-18): Regenerated from typed knowledge items (54 observed, 3 unknown). [sources: exploration]
+- v39 (2026-11-18): Regenerated from typed knowledge items (53 observed, 3 unknown). [sources: exploration]
+- v38 (2026-11-18): Regenerated from typed knowledge items (51 observed, 3 unknown). [sources: exploration]
+- v37 (2026-11-18): Regenerated from typed knowledge items (49 observed, 3 unknown). [sources: exploration]
+- v36 (2026-11-18): Regenerated from typed knowledge items (48 observed, 3 unknown). [sources: exploration]
+- v35 (2026-11-18): Regenerated from typed knowledge items (46 observed, 3 unknown). [sources: exploration]
+- v34 (2026-11-18): Regenerated from typed knowledge items (44 observed, 3 unknown). [sources: exploration]
+- v33 (2026-11-18): Regenerated from typed knowledge items (42 observed, 3 unknown). [sources: exploration]
+- v32 (2026-11-18): Regenerated from typed knowledge items (41 observed, 3 unknown). [sources: exploration]
+- v31 (2026-11-18): Regenerated from typed knowledge items (40 observed, 3 unknown). [sources: exploration]
+- v30 (2026-11-18): Regenerated from typed knowledge items (39 observed, 3 unknown). [sources: exploration]
+- v29 (2026-11-18): Regenerated from typed knowledge items (38 observed, 3 unknown). [sources: exploration]
+- v28 (2026-11-18): Regenerated from typed knowledge items (36 observed, 3 unknown). [sources: exploration]
+- v27 (2026-11-18): Regenerated from typed knowledge items (34 observed, 3 unknown). [sources: exploration]
+- v26 (2026-11-18): Regenerated from typed knowledge items (33 observed, 3 unknown). [sources: exploration]
+- v25 (2026-11-18): Regenerated from typed knowledge items (33 observed, 2 unknown). [sources: exploration]
+- v24 (2026-11-18): Regenerated from typed knowledge items (32 observed, 2 unknown). [sources: exploration]
+- v23 (2026-11-18): Regenerated from typed knowledge items (30 observed, 2 unknown). [sources: exploration]
+- v22 (2026-11-18): Regenerated from typed knowledge items (29 observed, 2 unknown). [sources: exploration]
+- v21 (2026-11-18): Regenerated from typed knowledge items (28 observed, 2 unknown). [sources: exploration]
+- v20 (2026-11-18): Regenerated from typed knowledge items (27 observed, 2 unknown). [sources: exploration]
+- v19 (2026-11-18): Regenerated from typed knowledge items (27 observed, 2 unknown). [sources: exploration]
+- v18 (2026-11-18): Regenerated from typed knowledge items (24 observed, 2 unknown). [sources: exploration]
+- v17 (2026-11-18): Regenerated from typed knowledge items (22 observed, 2 unknown). [sources: exploration]
+- v16 (2026-11-18): Regenerated from typed knowledge items (20 observed, 2 unknown). [sources: exploration]
+- v15 (2026-11-18): Regenerated from typed knowledge items (15 observed, 2 unknown). [sources: exploration]
+- v14 (2026-11-18): Regenerated from typed knowledge items (14 observed, 2 unknown). [sources: exploration]
+- v13 (2026-11-18): Regenerated from typed knowledge items (13 observed, 2 unknown). [sources: exploration]
+- v12 (2026-11-18): Regenerated from typed knowledge items (12 observed, 2 unknown). [sources: exploration]
+- v11 (2026-11-18): Regenerated from typed knowledge items (11 observed, 2 unknown). [sources: exploration]
+- v10 (2026-11-18): Regenerated from typed knowledge items (8 observed, 2 unknown). [sources: exploration]
+- v9 (2026-11-18): Regenerated from typed knowledge items (6 observed, 2 unknown). [sources: exploration]
+- v8 (2026-11-18): Regenerated from typed knowledge items (6 observed, 2 unknown). [sources: exploration]
+- v7 (2026-11-18): Regenerated from typed knowledge items (4 observed, 2 unknown). [sources: exploration]
+- v6 (2026-11-18): Regenerated from typed knowledge items (3 observed, 2 unknown). [sources: exploration]
+- v5 (2026-11-18): Regenerated from typed knowledge items (2 observed, 2 unknown). [sources: exploration]
+- v4 (2026-11-18): Regenerated from typed knowledge items (1 observed, 1 unknown). [sources: exploration]
+- v3 (2026-11-18): Regenerated from typed knowledge items (1 observed, 1 unknown). [sources: exploration]
+- v2 (2026-11-18): Regenerated from typed knowledge items (1 observed). [sources: exploration]
+- v1 (2026-11-18): Regenerated from typed knowledge items (1 observed). [sources: exploration]
